@@ -2,10 +2,12 @@
 
 A MERN-stack portal for TechFest 2026, where students browse events, register for them and leave feedback.
 
-| Folder    | What it is                                               |
-| --------- | -------------------------------------------------------- |
-| `client/` | React 18 + Vite frontend (React Router)                  |
-| `server/` | Express 4 + Mongoose API with JWT auth in a cookie       |
+| Folder                  | What it is                                                     |
+| ----------------------- | -------------------------------------------------------------- |
+| `client/`               | React 18 + Vite frontend (React Router, lazy-loaded pages)     |
+| `server/`               | Express 4 + Mongoose API, JWT in an httpOnly cookie            |
+| `server/security-demo/` | Deliberately vulnerable copy used to demo the attacks; never deploy it |
+| `docs/`                 | Experiment 5 report, architecture diagram, screenshots, Lighthouse reports |
 
 ## Run locally
 
@@ -23,3 +25,23 @@ cd client
 npm install
 npm run dev
 ```
+
+Tests: `cd server && npm test`
+
+## Security demo
+
+```bash
+cd server
+npm run demo:vulnerable      # http://localhost:4001
+```
+
+Click "Send login request" to log in as `admin@techfest.in` without the password, and post the prefilled feedback to see `alert('hi')` run. Then repeat both against the real app on port 5173 and they fail.
+
+## Deploy
+
+1. MongoDB Atlas: create an M0 cluster and a database user, allow `0.0.0.0/0` under Network Access, and copy the `mongodb+srv://...` string (add `/techfest` before the `?`).
+2. Render: New > Blueprint > this repo (it reads `render.yaml`). Set `MONGO_URI` to the Atlas string, and set `CLIENT_ORIGIN` to your Netlify URL once you have it. Open `https://<service>.onrender.com/api/health` to check it.
+3. Netlify: in `netlify.toml`, replace `techfest-api.onrender.com` with your Render host and push. Then Add new site > Import from Git > this repo; the build settings come from `netlify.toml`.
+4. Go back to Render and set `CLIENT_ORIGIN=https://<site>.netlify.app` (no trailing slash).
+
+Vercel instead of Netlify: import the repo with root directory `client`. `client/vercel.json` has the same proxy, SPA rewrite and headers; edit its Render host too.
