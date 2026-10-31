@@ -1,6 +1,7 @@
 const express = require('express');
 const Event = require('../models/Event');
 const { requireAuth } = require('../middleware/auth');
+const { eventIdRules } = require('../middleware/validate');
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ router.get('/mine', requireAuth, async (req, res, next) => {
   }
 });
 
-router.post('/:id/register', requireAuth, async (req, res, next) => {
+router.post('/:id/register', requireAuth, eventIdRules, async (req, res, next) => {
   try {
     const event = await Event.findById(req.params.id);
     if (!event) return res.status(404).json({ message: 'Event not found' });
