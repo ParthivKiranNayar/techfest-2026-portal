@@ -13,7 +13,7 @@ export default function Home() {
       <section className="hero">
         <p className="eyebrow">10 – 12 December 2026</p>
         <h1>TechFest 2026</h1>
-        <p className="tagline">Three days of code, robots and music.</p>
+        <p className="tagline">Code. Build. Compete. The biggest student tech fest in Kerala.</p>
         <div className="hero-actions">
           <Link to="/events" className="btn">
             Browse events
