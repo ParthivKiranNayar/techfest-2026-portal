@@ -2,6 +2,7 @@ const express = require('express');
 const Feedback = require('../models/Feedback');
 const User = require('../models/User');
 const { requireAuth } = require('../middleware/auth');
+const { feedbackRules } = require('../middleware/validate');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', requireAuth, async (req, res, next) => {
+router.post('/', requireAuth, feedbackRules, async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(401).json({ message: 'Account not found' });

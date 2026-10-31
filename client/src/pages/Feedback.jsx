@@ -67,8 +67,8 @@ export default function Feedback() {
               <strong>{f.name}</strong>
               <span aria-label={`${f.rating} out of 5`}>{'★'.repeat(f.rating)}</span>
             </div>
-            {/* Render as HTML so people can use <b> and line breaks */}
-            <p dangerouslySetInnerHTML={{ __html: f.message }} />
+            {/* Rendered as plain text: React escapes it, so <script> shows up as text instead of running */}
+            <p>{f.message}</p>
           </li>
         ))}
       </ul>
