@@ -3,6 +3,7 @@ import Navbar from './components/Navbar.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Home from './pages/Home.jsx';
 import Events from './pages/Events.jsx';
+import Schedule from './pages/Schedule.jsx';
 import Gallery from './pages/Gallery.jsx';
 import Feedback from './pages/Feedback.jsx';
 import Login from './pages/Login.jsx';
@@ -18,6 +19,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/schedule" element={<Schedule />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/login" element={<Login />} />

@@ -473,6 +473,26 @@ main.container {
   color: var(--muted);
 }
 
+/* Schedule */
+.schedule-day ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  border-left: 3px solid var(--primary);
+}
+
+.schedule-day li {
+  display: flex;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+}
+
+.schedule-day time {
+  min-width: 4.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
 .footer {
   text-align: center;
   padding: 1.5rem 16px;
