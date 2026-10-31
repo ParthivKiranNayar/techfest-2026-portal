@@ -25,6 +25,7 @@ export default function Navbar() {
         </button>
         <nav className={open ? 'nav-links open' : 'nav-links'} onClick={close}>
           <NavLink to="/events">Events</NavLink>
+          <NavLink to="/schedule">Schedule</NavLink>
           <NavLink to="/gallery">Gallery</NavLink>
           <NavLink to="/feedback">Feedback</NavLink>
           {user ? (
