@@ -1,0 +1,28 @@
+# Render Blueprint for the API: Render dashboard -> New -> Blueprint -> pick this repo.
+# (Or create a Web Service by hand with the same settings.)
+services:
+  - type: web
+    name: techfest-api
+    runtime: node
+    plan: free
+    region: singapore
+    rootDir: server
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22
+      # Requests arrive via Netlify's proxy and then Render's, so the client IP is two hops back
+      - key: TRUST_PROXY
+        value: 2
+      - key: JWT_SECRET
+        generateValue: true
+      # Set these two in the dashboard: they are secrets / depend on your URLs
+      - key: MONGO_URI
+        sync: false
+      - key: CLIENT_ORIGIN
+        sync: false

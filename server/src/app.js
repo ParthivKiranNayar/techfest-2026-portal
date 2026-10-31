@@ -13,10 +13,11 @@ const feedbackRoutes = require('./routes/feedback');
 const app = express();
 const isProduction = process.env.NODE_ENV === 'production';
 
-const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173').split(',').map((o) => o.trim());
+const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173,http://localhost:4173').split(',').map((o) => o.trim());
 
-// Render terminates TLS at its proxy; trust it so req.secure and req.ip are correct
-app.set('trust proxy', 1);
+// Render terminates TLS at its proxy; trust it so req.secure and req.ip are correct.
+// Behind the Netlify /api proxy there is one more hop, so render.yaml sets TRUST_PROXY=2.
+app.set('trust proxy', Number(process.env.TRUST_PROXY || 1));
 
 // Security headers: CSP, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, ...
 app.use(
@@ -59,7 +60,7 @@ app.use((req, res, next) => {
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 20,
+  limit: 30,
   standardHeaders: 'draft-7',
   legacyHeaders: false,
   skip: () => process.env.NODE_ENV === 'test',
