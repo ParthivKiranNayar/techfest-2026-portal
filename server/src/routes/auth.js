@@ -52,6 +52,19 @@ router.post('/logout', (req, res) => {
   res.json({ message: 'Logged out' });
 });
 
+// Used by the client on page load: answers 200 with user: null when logged out, so it doesn't log a 401
+router.get('/session', async (req, res) => {
+  const token = req.cookies && req.cookies.token;
+  if (!token) return res.json({ user: null });
+  try {
+    const { id } = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(id);
+    res.json({ user: user ? user.toPublic() : null });
+  } catch {
+    res.json({ user: null });
+  }
+});
+
 router.get('/me', requireAuth, async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);

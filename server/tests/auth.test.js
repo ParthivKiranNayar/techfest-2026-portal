@@ -60,6 +60,16 @@ describe('auth', () => {
     expect(bad.status).toBe(401);
   });
 
+  test('/session returns null when logged out and the user when logged in', async () => {
+    const anon = await request(app).get('/api/auth/session');
+    expect(anon.status).toBe(200);
+    expect(anon.body.user).toBeNull();
+
+    const cookie = await registerAndGetCookie(request, app);
+    const res = await request(app).get('/api/auth/session').set('Cookie', cookie);
+    expect(res.body.user.email).toBe(student.email);
+  });
+
   test('/me needs a valid session', async () => {
     expect((await request(app).get('/api/auth/me')).status).toBe(401);
     expect((await request(app).get('/api/auth/me').set('Cookie', 'token=forged.jwt.value')).status).toBe(401);

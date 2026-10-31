@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
+const compression = require('compression');
 const mongoSanitize = require('express-mongo-sanitize');
 const rateLimit = require('express-rate-limit');
 
@@ -36,6 +37,9 @@ if (isProduction) {
     res.redirect(308, `https://${req.headers.host}${req.originalUrl}`);
   });
 }
+
+// gzip JSON responses
+app.use(compression());
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json({ limit: '10kb' }));
