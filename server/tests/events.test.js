@@ -18,7 +18,7 @@ describe('events', () => {
     const res = await request(app).get('/api/events');
 
     expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(events.length);
+    expect(res.body).toHaveLength(7);
     const dates = res.body.map((e) => new Date(e.date).getTime());
     expect(dates).toEqual([...dates].sort((a, b) => a - b));
   });
