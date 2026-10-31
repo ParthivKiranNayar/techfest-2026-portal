@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     // The token lives in an httpOnly cookie, so ask the server who we are
     api
-      .me()
+      .session()
       .then((data) => setUser(data.user))
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
