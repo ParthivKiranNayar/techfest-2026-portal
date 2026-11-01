@@ -41,7 +41,7 @@ Click "Send login request" to log in as `admin@techfest.in` without the password
 
 1. MongoDB Atlas: create an M0 cluster and a database user, allow `0.0.0.0/0` under Network Access, and copy the `mongodb+srv://...` string (add `/techfest` before the `?`).
 2. Render: New > Blueprint > this repo (it reads `render.yaml`). Set `MONGO_URI` to the Atlas string, and set `CLIENT_ORIGIN` to your Netlify URL once you have it. Open `https://<service>.onrender.com/api/health` to check it.
-3. Netlify: in `netlify.toml`, replace `techfest-api.onrender.com` with your Render host and push. Then Add new site > Import from Git > this repo; the build settings come from `netlify.toml`.
+3. Netlify: in `netlify.toml`, replace `techfest-api-i47k.onrender.com` with your Render host and push. Then Add new site > Import from Git > this repo; the build settings come from `netlify.toml`.
 4. Go back to Render and set `CLIENT_ORIGIN=https://<site>.netlify.app` (no trailing slash).
 
 Vercel instead of Netlify: import the repo with root directory `client`. `client/vercel.json` has the same proxy, SPA rewrite and headers; edit its Render host too.

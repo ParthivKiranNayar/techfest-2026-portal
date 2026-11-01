@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://techfest-api.onrender.com/api/:path*" },
+    { "source": "/api/:path*", "destination": "https://techfest-api-i47k.onrender.com/api/:path*" },
     { "source": "/((?!assets/|gallery/|favicon.svg|robots.txt).*)", "destination": "/index.html" }
   ],
   "headers": [

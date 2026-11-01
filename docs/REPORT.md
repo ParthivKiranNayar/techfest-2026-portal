@@ -169,10 +169,14 @@ I kept the slogan from one side and the description from the other, deleted the 
 
 The tests cover registration, password hashing, login, the cookie flags, the three NoSQL injection payloads, XSS payload storage, the CSRF origin check, the Helmet headers, the body size limit, event registration and validation.
 
-To show a failing pipeline, commit `c8e6bec` changed one test to expect 7 events when the seed data has 6. Jest reported `1 failed, 17 passed` and the run went red. Commit `b16e343` put the expectation back (`events.length`) and the run went green.
+To show a failing pipeline, commit `c8e6bec` changed one test to expect 7 events when the seed data has 6. That commit was pushed to GitHub on its own first. Run #1 failed at the "Run tests" step of the API job (the React build job still passed, and the deploy job was skipped). Commit `b16e343` put the expectation back (`events.length`). The rest of `main` was then pushed, and run #2 on `80eedd8` passed every job. The four feature branches were pushed too, and their runs are green as well.
 
+Repository: https://github.com/ParthivKiranNayar/techfest-2026-portal
+
+![CI runs list](screenshots/ci-runs.png)
 ![CI red](screenshots/ci-red.png)
 ![CI green](screenshots/ci-green.png)
+![Branches on GitHub](screenshots/github-branches.png)
 
 ## 5. Cloud deployment
 
