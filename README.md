@@ -7,8 +7,6 @@ A MERN-stack portal for TechFest 2026, where students browse events, register fo
 | `client/`               | React 18 + Vite frontend (React Router, lazy-loaded pages)     |
 | `server/`               | Express 4 + Mongoose API, JWT in an httpOnly cookie            |
 | `server/security-demo/` | Deliberately vulnerable copy used to demo the attacks; never deploy it |
-| `docs/`                 | Experiment 5 report, architecture diagram, screenshots, Lighthouse reports |
-
 ## Run locally
 
 You need Node.js 20 or newer. MongoDB is optional: if `MONGO_URI` is empty, the API starts an in-memory database.
