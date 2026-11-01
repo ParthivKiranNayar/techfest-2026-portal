@@ -206,7 +206,6 @@ Checks on the live site (1 November 2026):
 - Both hosts use TLS 1.3. The Netlify certificate is for `*.netlify.app` (DigiCert); the Render certificate is for `onrender.com`. Plain `http://` gets a 301 to `https://` on both, and both send an HSTS header.
 
 ![Live HTTPS check](screenshots/live-https.png)
-![Atlas users collection](screenshots/atlas-user.png)
 ![Registered for an event on the live site](screenshots/live-event-registered.png)
 ![Live dashboard](screenshots/live-dashboard.png)
 ![XSS attempt on the live site](screenshots/live-feedback-xss.png)
